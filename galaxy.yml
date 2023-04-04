@@ -1,0 +1,15 @@
+namespace: sense
+name: dummytmpl
+version: 1.0.0
+readme: README.md
+authors:
+- Justas Balcas <juztas@gmail.com>
+description: Ansible Network Collections for dummytmpl
+license_file: LICENCE
+tags: [dummytmpl]
+dependencies:
+  ansible.netcommon: '>=1.0.0'
+repository: https://github.com/sdn-sense/sense-dummytmpl-collection
+documentation: https://github.com/sdn-sense/sense-dummytmpl-collection
+homepage: https://github.com/sdn-sense/sense-dummytmpl-collection
+issues: https://github.com/sdn-sense/sense-dummytmpl-collection

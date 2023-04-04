@@ -1,0 +1,9 @@
+plugin_routing:
+  action:
+    dummytmpl_config:
+      redirect: sense.dummytmpl.dummytmpl
+    dummytmpl_command:
+      redirect: sense.dummytmpl.dummytmpl
+    dummytmpl_facts:
+      redirect: sense.dummytmpl.dummytmpl
+
