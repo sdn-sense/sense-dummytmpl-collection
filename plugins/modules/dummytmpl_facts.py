@@ -24,7 +24,7 @@ class FactsBase():
 
     def populate(self):
         """Populate responses"""
-        self.responses = run_commands(self.module, self.COMMANDS.values(), check_rc=False)
+        self.responses = run_commands(self.module, list(self.COMMANDS.values()), check_rc=False)
 
     def run(self, cmd):
         """Run commands"""
@@ -34,9 +34,9 @@ class FactsBase():
         """Save RAW Output for debugging"""
         counter = 0
         for key, _cmd in commands.items():
-            self.rawout.setdefault(f'{key}_raw', {})
+            self.rawout.setdefault(key, {})
             try:
-                self.rawout[f'{key}_raw'] = self.responses[counter]
+                self.rawout[key] = self.responses[counter]
             except IndexError:
                 pass
             counter +=1
@@ -139,6 +139,7 @@ def main():
     runable_subsets.add('default')
 
     facts = {}
+    rawfacts = {}
     facts['gather_subset'] = [runable_subsets]
 
     instances = []
@@ -148,11 +149,15 @@ def main():
     for inst in instances:
         inst.populate()
         facts.update(inst.facts)
+        if inst.rawout:
+            rawfacts.update(inst.rawout)
 
     ansible_facts = {}
     for key, value in iteritems(facts):
-        key = 'ansible_net_%s' % key
+        key = f'ansible_net_{key}'
         ansible_facts[key] = value
+
+    ansible_facts['ansible_raw_output'] = rawfacts
 
     warnings = []
     check_args(module, warnings)
